@@ -6,7 +6,6 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  
   },
   "author": "afif",
   "license": "ISC",
@@ -19,8 +18,11 @@
     "express-session": "^1.17.2",
     "flash": "^1.1.0",
     "hbs": "^4.2.0",
+    "hbs-moment": "^0.0.1",
+    "moment": "^2.29.1",
     "multer": "^1.4.4",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "postgres-date": "^2.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

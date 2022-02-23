@@ -6,9 +6,11 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-              <a class="navbar-brand" href="#">Navbar</a>
+              <a class="navbar-brand" href="#">
+                <img src="/public/logo.png" alt="">
+              </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -18,52 +20,103 @@
                     <a class="nav-link active" aria-current="page" href="/index">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/contact">Link</a>
+                    <a class="nav-link" href="/add-project">My Project</a>
                   </li>
                  
                     
                   
                 </ul>
-                <form class="d-flex">
+                <div class="d-flex">
                   
-                   <a href="/contact"> Contact Me </a>
-                </form>
+                 <a href="/contact" class="btn btn-dark active" aria-current="page">Contact</a>
+                </div>
               </div>
             </div>
           </nav>
-          <div class="container-lg h-100 d-flex justify-content-center d-flex align-items-center flex-c0lumn">
-          
-          <form class="w-50">
-            <h1 class="text-center">contact</h1>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <div class="container-lg h-100 d-flex justify-content-center d-flex align-items-center flex-column">
+           
+              <form class="row g-3 w-75  "action="/add-project"method="POST" onsubmit="return myFunction()"enctype="multipart/form-data">
+                <h1 class="d-flex justify-content-center text-uppercase">add my project</h1>
+                <div class="col-12">
+                    <label for="name" class="form-label">Project name</label>
+                    <input type="text" class="form-control"name="name"id="name" placeholder="masukkan nama">
+                  </div>
+            <div class="col-md-6">
+              <label for="start-date" class="form-label">Start date</label>
+              <input type="date" class="form-control"name="start_date" id="start-date">
             </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+            <div class="col-md-6">
+              <label for="end-date" class="form-label">End date</label>
+              <input type="date" class="form-control" name="end_date" id="end-date">
             </div>
+           
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
               </div>
-              <div class="select">
-                  <p> jalur</p>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-              </div>
-              
-              <div class="mb-3 mt-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-              </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+           
+           
+            <div class="col-12">
+               <label for="tecno">technologies
+                <div class="form2 d-flex  ">
+                     <div class="form-check"style="flex: 50%;">
+                       <input type="checkbox" name="technologies" id="techno" onclick="myFunction()"value="node.png">node js<br>
+                       
+                         
+                       
+                      </div>
+                      <div class="form-check"style="flex: 50%;">
+                       <input type="checkbox" name="technologies" id="techno" onclick="myFunction()"value="jquery.png">type script<br>
+                        
+                      </div>
+                 </div>
+                 <div class="form2 d-flex  ">
+                    <div class="form-check"style="flex: 50%;">
+                         <input type="checkbox" name="technologies" id="techno" onclick="myFunction()"value="react.png">react<br>
+                      </div>
+                      <div class="form-check"style="flex: 50%;">
+                       <input type="checkbox" name="technologies" id="techno" onclick="myFunction()"value="js.png">next <br>
+                      </div>
+                 </div>
+                </label>
+                  
+            </div>
+
+            <div class="col-12">
+                  <div class="input-group d-flex flex-column">
+                   <p>upload</p>
+                     <label for="image" class="d-flex d-flex justify-content-between bg-secondary  text-dark bg-opacity-10 ">
+                         
+                        <p class="d-flex float-start justify-content-start mb-0 h-100  badge bg-primary text-wrap bg-secondary" 
+                          style="width: 6rem; height:100%; font-size:18px; ">upload</p>
+                        <img class="d-flex" src="/public/assets/file.png" alt="file">
+                    </label>
+                    <input hidden type="file" class="form-control" id="image" name="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                    
+                    
+                  </div>
+                  </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary float-end mt-5 btn btn-dark" >post</button>
+            </div>
           </form>
         </div>
+       <script>
+    
+  
+function myFunction() {
+  var coffee = document.forms[0];
+  var txt = "";
+  var i;
+  for (i = 0; i < coffee.length; i++) {
+    if (coffee[i].checked) {
+      txt = txt + coffee[i].value + " ";
+    }
+  }
+  document.getElementById("order").value = "You ordered a coffee with: " + txt;
+}
+
+</script>
+      
     </body>
 </html>

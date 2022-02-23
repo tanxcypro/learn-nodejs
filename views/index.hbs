@@ -6,30 +6,45 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-secondary">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <body >
+        <nav class="navbar navbar-expand-lg navbar-light bg-Light">
             <div class="container">
-              <a class="navbar-brand" href="#">Navbar</a>
+              <a class="navbar-brand" href="#">
+                <img src="/public/logo.png" alt="">
+              </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 float-right">
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/index">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/add-project">Link</a>
+                    
+          
+          
+                    <a class="nav-link" href="add-project">My Project</a>
                   </li>
+                 
+                    
                   
                 </ul>
-                <form class="d-flex">
-                 
-                  <a href="/contact"> Contact Me </a>
-                </form>
+                <div class="d-flex">
+                  
+            <a href="/login" style="margin-right:12px; background-color:rgb(245, 244, 244);color:black; margin-top:10px;" "list-active">login,{{user.nama}}</a>
+          
+            <a href="/logout" style="margin-right:12px; background-color:rgb(245, 244, 244);color:black; margin-top:10px;" "list-active">logout</a>
+                  
+                 <a href="/add-project" class="btn btn-Dark active" aria-current="page">Contact</a>
+                </div>
               </div>
             </div>
           </nav>
+           {{#if sukses}}
+          <div class="alert alert-success" role="alert"> {{sukses}}</div>
+         {{/if}}
+         
           <div class="container-xxl d-flex justify-content-between d-flex d-flex align-items-center h-75 "> 
             <div class="card mb-3" style="width: 100%;height: 80%;">
             <div class="row h-100 p-5">
@@ -48,7 +63,7 @@
                       
                       <img src="/public/img/file_download_black_24dp.svg" alt="file">
                     </label>
-                     <input type="file"hidden>
+                     <input type="file" id="button2" hidden>
                     </div>
                   </div>
                  
@@ -85,44 +100,57 @@
         
         </div>
         
+         <div class="container d-flex bg-white mt-5">
+  
+    <div class="row-3 ">
+      <div id="contents" class="row gap-5 "style="height:700px;">
+                {{#each tb_project1}}
+             <div class="card "style="height: 580px;width: 407px;" >
+                <img src="/uploads/{{this.image}}" style="height:55% ; width: 100%; display: flex;justify-content: center;"class=" rounded p-2 " alt="">
+                <div class="card-body">
+                  <a href="detail/{{this.id}}"><h5 class="card-title">{{this.name}}</h5></a>
+                  
+                  <p>{{this.post_At}}</p>
+                  <p class="card-text"> {{this.description}}</p>
+                   <div id="image" class="sosmed d-flex align-items-end  gap-2 text-decoration-nones mb-2">
+                    
+                      <a href="">
+                        <img src="/public/img/twitter.png" alt="">
+                      </a>
+                      <a href="">
+                        <img src="/public/img/mail.png" alt="">
+                      </a>
+                      <a href="">
+                        <img src="/public/img/whatsapp.png" alt="">
+                      </a>
+                      <a href="">
+                        <img src="/public/img/js.png" alt="">
+                      </a>
+                    </div>
+                   
+                  <div class="col-md-6 w-100 d-flex  justify-content-between gap-2">
+                     {{#if this.isLogin}}
+                     <a href="update/{{this.id}}" class="btn btn-Dark d-flex w-50 justify-content-center">Update</a>
+                   <a href="delete-blog/{{this.id}}" class="btn btn-Dark d-flex w-50 ">Delete</a>
+                   </div>
+                  
+                  {{/if}}
+                </div>
+              </div>
+              {{/each}}
+            </div>
+    </div>
+   
+  </div>
+</div>
+             
+          
          
-        
-        <div class="container-fluid  h-100 w-100 p-3 d-flex justify-content-center d-flex align-items-center bg-white">
-          <div class="row container-lg  mt-5 fluid d-flex flex-wrap  ">
-            <div class="col w-90  "style="height:700px;">
-              <div class="card" style="width:100%;height: 600px;">
-                <img src="/public/book.jpg" style="height:300px ; width: 100%; display: flex;justify-content: center;"class=" rounded p-2 " alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-             <div class="card" style="width:100%; height: 600px;">
-                <img src="/public/blog-img-detail.png" style="height:300px ; width: 100%; display: flex;justify-content: center;"class=" rounded p-2 " alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card" style="width:100%;height: 600px;">
-                <img src="/public/book.jpg" style="height:300px ; width: 100%; display: flex;justify-content: center;"class=" rounded p-2 " alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            
-          </div>
+         
+         
           
-        </div>
-          
+         
+       
+         
     </body>
 </html>
