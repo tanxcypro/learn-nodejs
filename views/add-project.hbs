@@ -35,7 +35,7 @@
           </nav>
           <div class="container-lg h-100 d-flex justify-content-center d-flex align-items-center flex-column">
            
-              <form class="row g-3 w-75  "action="/add-project"method="POST" onsubmit="return myFunction()"enctype="multipart/form-data">
+              <form class="row g-3 w-75  "action="/add-project"method="POST" enctype="multipart/form-data">
                 <h1 class="d-flex justify-content-center text-uppercase">add my project</h1>
                 <div class="col-12">
                     <label for="name" class="form-label">Project name</label>
@@ -101,7 +101,7 @@
             </div>
           </form>
         </div>
-       <script>
+       {{!-- <script>
     
   
 function myFunction() {
@@ -116,7 +116,7 @@ function myFunction() {
   document.getElementById("order").value = "You ordered a coffee with: " + txt;
 }
 
-</script>
+</script> --}}
       
     </body>
 </html>

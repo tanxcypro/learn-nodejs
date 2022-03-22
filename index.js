@@ -67,6 +67,7 @@ const month = [
      res.send("hello world")
  })
  app.get('/index',function(req,res){
+    
      
     let query=`SELECT tb_project1.id, name, start_date,end_date, description,technologies,tb_user.nama, image, author_id
 	FROM tb_project1
@@ -83,19 +84,48 @@ const month = [
                     isLogin:isLogin,
                     post_At:getFullTime(new Date()),
                     user:req.session.user,
-                    isLogin:req.session.isLogin,
+                    isLogin:req.session.isLogin
+                  
+                   
                     
                 }
 
                 })
                 let sukses=req.flash('success')
                
-                console.log(data)
+                // for(let i=0;i<data.length;i++){
+                //     let node=data[i].technologies
+
+                //     for(let i=0;i<node.length;i++){
+                //         let node_a =node[i]
+                //        console.log(node_a);
+                    // }
+
+                //     if (node==true){
+                      
+                //     }
+                    let node=data[0].technologies[0]
+                    let react=data[1].technologies[1]
+                    let type=data[2].technologies[2]
+                    let jquery=data[3].technologies[3]
+                   
+               
+                // }
+               
+               
+               
+                console.log(react,node,type,jquery);
+
+                 
+                 
+               
+            
                 res.render('index',{
                     isLogin:req.session.isLogin,
                    tb_project1:dataBlogs,
                 user:req.session.user,
-                sukses:sukses
+                sukses:sukses,type,react,node,jquery
+               
             })
              
          
@@ -127,22 +157,26 @@ app.get('/update/:id', function(req, res) {
         client.query(`SELECT*FROM tb_project1 WHERE id=${id}`,function(err,result){
             if(err)throw err
             let data=result.rows[0]
+
+            data={
+                ...data,
+                start_date: renderDate(data.start_date),
+                end_date: renderDate(data.end_date),
+               
+
+            }
            
                
                
               
-               let start_date= getFullTime(new Date(data.start_date))
-               let end_date= getFullTime(new Date(data.end_date))
-               let techno=data.technologies[0]
-             
               
+              
+               console.log(data);
              
-            //   techno.forEach
-              console.log(techno);
        
               
                res.render('update', { 
-                                    tb_project1:data,start_date,end_date}) 
+                                    tb_project1:data}) 
            })
         })
    
@@ -152,7 +186,8 @@ app.post('/update/:id', upload.single('image'),function(req,res){
     let id=req.params.id
  
   let technologies=req.body.technologies
-  let techno='{'+technologies+'}'
+  
+  let techno=technologies
 
   const { name,start_date,end_date, description} = req.body
   let data = {
@@ -160,15 +195,15 @@ app.post('/update/:id', upload.single('image'),function(req,res){
     start_date,
     end_date,
     description,
-    techno,
+    technologies,
     image: req.file.filename,
-    author_id: req.session.user.id
+   
 }
 
     db.connect(function(err,client,done){
         if(err)throw err
         client.query(`UPDATE tb_project1
-        SET name='${data.name}', description='${data.description}', technologies='${data.techno}', image='${data.image}', start_date='${data.start_date}', end_date='${data.end_date}'
+        SET name='${data.name}', description='${data.description}', technologies='${data.technologies}', image='${data.image}', start_date='${data.start_date}', end_date='${data.end_date}'
         WHERE id=${id}`,function(err,result){
             if(err)throw err
             let data=result.rows[0]
@@ -257,7 +292,7 @@ app.post('/login',function(req,res){
             done()
             
             if (err) throw err
-
+           
             if (result.rowCount == 0) {
                 req.flash('danger', 'email and password doesnt match')
                 return res.redirect('/login')
@@ -327,6 +362,7 @@ app.get('/detail/:id',function(req,res){
 
       
     let id=req.params.id
+ 
    
     db.connect(function(err,client,done){
        if(err)throw err
@@ -343,64 +379,18 @@ app.get('/detail/:id',function(req,res){
         //     }
 
         //     })
-        function getDistanceTime(time) {
-    
-            let timePost=time
-            
-            let timeNow=new Date(data.end_date)
-            
         
-            let distance=timeNow-timePost
-           
-            
-            let miliSecond=1000
-            let secondHours=3600
-            let hoursDay= 23
-            let daysMounth=30
         
-            let mounth=Math.floor(distance / (miliSecond*secondHours*hoursDay*daysMounth))
-        
-         if(mounth>=1){
-             return `${mounth} mounth ago`
-         }else{
-        
-             let Day=Math.floor(distance / (miliSecond*secondHours*hoursDay))
-         if (Day >=1) {
-             
-            return`${Day} ago`
-                 
-                
-            } else {
-                
-             let distanceHours=Math.floor(distance/(miliSecond*secondHours))
-             if (distanceHours>=1) {
-                 console.log(`${distanceHours} hours ago`)
-                 
-             }else{
-                 let distanceMinutes=Math.floor(distance/(miliSecond*60))
-                 if(distanceMinutes>=1){
-                     return`${distanceMinutes} minutes ago`
-                 }else{
-                     let hasil= Math.ceil(distance/miliSecond)
-                     return `${hasil} second `
-                 }
-                 
-             }
-            }
-            
+        let start_date= renderDate(new Date(data.start_date))
+        let end_date= renderDate(new Date(data.end_date))
+        // let hasil=getDistanceTime(new Date(data.start_date))
+         let techno=data.technologies
+         for(let i=0;i<techno.length;i++){
+             let box=techno[i]
+             console.log(box);
          }
         
-            
-         
-        }
-        
-        
-        let start_date= getFullTime(new Date(data.start_date))
-        let end_date= getFullTime(new Date(data.end_date))
-        let hasil=getDistanceTime(new Date(data.start_date))
-        let techno=data.technologies
-        let r=techno[0]
-        let n=techno[1]
+        console.log(techno);
         
 //         techno.forEach(myFunction);
 
@@ -408,11 +398,11 @@ app.get('/detail/:id',function(req,res){
  
 // function myFunction(data) {
 // data
-console.log(r)
+
 // }
 
               
-              res.render('detail', { id: id ,tb_project1:data,start_date,end_date,hasil,r,n}) 
+              res.render('detail', { id: id ,tb_project1:data,start_date,end_date}) 
           })
        })
 
@@ -447,5 +437,24 @@ app.get('/logout', function (req, res) {
     }
 
     return `${date} ${month[monthIndex]} ${year} ${hours}:${minutes} WIB`
+}
+
+function renderDate(time) {
+
+    let hari = [
+        "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"
+    ]
+
+    let bulan = [
+        "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+    ]
+
+    let date = time.getDate();
+    let monthIndex = time.getMonth();
+    let year = time.getFullYear();
+
+    let fullTime = `${year}-${bulan[monthIndex]}-${hari[date]}`;
+
+    return fullTime;
 }
 

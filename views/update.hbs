@@ -35,7 +35,7 @@
           </nav>
           <div class="container-lg h-100 d-flex justify-content-center d-flex align-items-center flex-c0lumn">
           
-              <form class="row g-3 w-75  "action="/update/{{tb_project1.id}}"method="POST">
+              <form class="row g-3 w-75  "action="/update/{{tb_project1.id}}"method="POST"enctype="multipart/form-data">
              
                 <h1 class="d-flex justify-content-center text-uppercase"> Edit my project</h1>
                 <input type="hidden"value=" ">
@@ -46,11 +46,11 @@
                   </div>
             <div class="col-md-6">
               <label for="start_date" class="form-label"><h5>Start date</h5></label>
-              <input type="date" class="form-control" name="start_date" id="start_date" value="{{start_date}}">
+              <input type="date" class="form-control" name="start_date" id="start_date" value="{{tb_project1.start_date}}">
             </div>
             <div class="col-md-6">
               <label for="end-date" class="form-label"><h5>End date</h5></label>
-              <input type="date" class="form-control" name= "end_date" id="end-date"value="{{end_date}}">
+              <input type="date" class="form-control" name= "end_date" id="end-date"value="{{tb_project1.end_date}}">
             </div>
            
             <div class="mb-3">
@@ -58,32 +58,33 @@
                 <textarea class="form-control" id="pesan" rows="3" value="{{tb_project1.description}}">{{tb_project1.description}}</textarea>
               </div>
            
-           
+          
             <div class="col-12">
-               <label for="tecno">technologies
+               <label for="techno">technologies
                 <div class="form2 d-flex  ">
                      <div class="form-check"style="flex: 50%;">
-                       <input type="checkbox" name="technologies" id="techno" checked onclick="myFunction()"value="node.js">node js<br>
+                       <input type="checkbox" name="technologies[]" checked="true" id="{{data.technologies.[0]}}"value="{{data.technologies.[0]}}">node js<br>
                        
                          
                        
                       </div>
                       <div class="form-check"style="flex: 50%;">
-                       <input type="checkbox" name="technologies" id="techno"checked onclick="myFunction()"value="jquery.png">type script<br>
+                       <input type="checkbox" name="technologies[]" checked="true" id="techno"value="{{data.technologies.[1]}}">type script<br>
                         
                       </div>
                  </div>
                  <div class="form2 d-flex  ">
-                    <div class="form-check"style="flex: 50%;">
-                         <input type="checkbox" name="technologies" id="techno"checked onclick="myFunction()"value="react.png">react<br>
+                    <div class="form-check" style="flex: 50%;">
+                         <input type="checkbox" name="technologies[]s" checked="" id="techno"value="{{data.technologies.[2]}}">react<br>
                       </div>
                       <div class="form-check"style="flex: 50%;">
-                       <input type="checkbox" name="technologies" id="techno"checked onclick="myFunction()"value="js.png">next <br>
+                       <input type="checkbox" name="technologies[]" checked="true" id="techno"value="{{data.technologies.[3]}}">next <br>
                       </div>
                  </div>
                 </label>
                   
             </div>
+            
 
             <div class="col-12">
                
