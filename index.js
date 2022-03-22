@@ -10,7 +10,7 @@ const upload = require('./middlewares/uploadFile')
 const db=require('./connect/db')
  
 const app=express()
-const port=5000
+const port=process.env.PORT||5000
 
 let isLogin=true
 // let blogs=[{
